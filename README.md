@@ -1,6 +1,6 @@
 # Fastapi Redis
 
-This package provides a client that integrates with Fastapi and provides a decorator to cache fastapi controllers.
+This package provides a client that integrates with Fastapi and provides a decorator to cache fastapi controllers responses.
 
 ## Installation
 
