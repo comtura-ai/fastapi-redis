@@ -47,7 +47,7 @@ class RedisClient(Redis):
         value = json.dumps(value)
         return await super().set(name=name,
                                  value=value,
-                                 ex=expiration.seconds if expiration else None,
+                                 ex=expiration,
                                  nx=nx,
                                  xx=xx,
                                  keepttl=keepttl)
