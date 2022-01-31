@@ -10,6 +10,8 @@ setup(
     packages = ['fastapi_redis'],
     install_requires = [
         'aioredis >= 2.0.0',
-        'starlette >= 0.14'
+        'starlette >= 0.14',
+        'pydantic >= 1.8.0'
+        'pytest >= 6.2.0'
     ]
 )
