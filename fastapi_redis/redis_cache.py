@@ -3,7 +3,7 @@ import logging
 from datetime import timedelta
 from functools import wraps
 
-import redis_client
+from fastapi_redis import redis_client
 
 def redis_cache(cache_key_str: str, expiration: timedelta = None):
     """
