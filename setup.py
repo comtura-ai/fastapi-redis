@@ -1,8 +1,10 @@
+import os
+
 from setuptools import setup
 
 setup(
     name='fastapi-redis',
-    version='0.1.0',
+    version=os.getenv('VERSION'),
     license='MIT',
     author='Comtura',
     author_email='info@comtura.ai',
