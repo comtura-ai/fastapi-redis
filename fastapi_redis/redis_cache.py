@@ -5,6 +5,7 @@ from functools import wraps
 
 from fastapi_redis import redis_client
 
+
 def redis_cache(cache_key_str: str, expiration: timedelta = None):
     """
     Decorator for FastAPI controllers to cache the responses using redis.

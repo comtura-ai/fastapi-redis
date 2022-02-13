@@ -1,7 +1,9 @@
 import json
-from typing import Any, Awaitable, Optional
+import os
+from datetime import timedelta
+from typing import Any, Awaitable, Type, Union
 
-from aioredis.client import Redis, KeyT, ExpiryT
+from aioredis.client import Redis, KeyT
 from aioredis.connection import EncodableT
 
 from starlette.background import BackgroundTasks
