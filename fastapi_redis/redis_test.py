@@ -1,10 +1,21 @@
+import asyncio
 from datetime import timedelta
 from time import sleep
 
 import pytest
 from pydantic import BaseModel
 
-from comtura.redis import redis_client
+from fastapi_redis import redis_client
+
+
+@pytest.fixture(scope='session')
+def event_loop():
+    """
+    Setup the event loop for the tests.
+    """
+    loop = asyncio.get_event_loop()
+    yield loop
+    loop.close()
 
 
 @pytest.mark.asyncio
@@ -37,7 +48,7 @@ async def test_redis_get_model():
 @pytest.mark.asyncio
 async def test_redis_remove():
     await redis_client.delete('number')
-    assert await redis_client.get('number') == None
+    assert await redis_client.get('number') is None
 
 
 @pytest.mark.asyncio
@@ -46,4 +57,4 @@ async def test_redis_expiration():
     assert await redis_client.get('number') == 100
 
     sleep(2)
-    assert await redis_client.get('number') == None
+    assert await redis_client.get('number') is None
