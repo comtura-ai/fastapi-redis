@@ -43,7 +43,9 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
       - name: Compile Python package
-        run: python setup.py sdist
+        run: |
+          echo $VERSION
+          python setup.py sdist
         env:
           VERSION: ${{ github.event.release.tag_name }}
       - name: Publish a Python distribution to PyPI
