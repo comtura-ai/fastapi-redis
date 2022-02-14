@@ -47,5 +47,6 @@ jobs:
         env:
           VERSION: ${{ github.event.release.tag_name }}
         with:
+          verbose: true
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
