@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='fastapi-redis',
-    version=os.getenv('VERSION'),
+    version='__version__',
     license='MIT',
     author='Comtura',
     author_email='info@comtura.ai',
