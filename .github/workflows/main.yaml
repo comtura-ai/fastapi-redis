@@ -44,8 +44,9 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup package version
         run: |
-          echo 'Package version: ${VERSION}'
-          sed -i "" "s/__version__/${VERSION}/g" setup.py
+          V=${VERSION:1}
+          echo "Package version: $V"
+          sed -i "" "s/__version__/$V/g" setup.py
           cat setup.py
         env:
           VERSION: ${{ github.ref_name }}
