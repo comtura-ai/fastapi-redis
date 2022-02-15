@@ -42,12 +42,16 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Compile Python package
+      - name: Setup package version
         run: |
-          echo $VERSION
-          python setup.py sdist
+          echo 'Package version: ${VERSION}'
+          sed -i "" "s/__version__/${VERSION}/g" setup.py
+          cat setup.py
         env:
           VERSION: ${{ github.ref_name }}
+      - name: Compile Python package
+        run: |
+          python setup.py sdist
       - name: Publish a Python distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
