@@ -46,7 +46,7 @@ jobs:
         run: |
           V=${VERSION:1}
           echo "Package version: $V"
-          sed -i "" "s/__version__/$V/g" setup.py
+          sed -i "s/__version__/$V/g" setup.py
           cat setup.py
         env:
           VERSION: ${{ github.ref_name }}
