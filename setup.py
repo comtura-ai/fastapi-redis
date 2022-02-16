@@ -16,10 +16,10 @@ setup(
     download_url='https://github.com/comtura-ai/fastapi-redis/archive/refs/heads/main.zip',
     keywords=['fastapi', 'redis', 'cache'],
     install_requires=[
-        'aioredis >= 2.0.0',
+        'aioredis >= 2.0',
         'starlette >= 0.14',
-        'pydantic >= 1.8.0',
-        'pytest >= 6.2.0',
-        'pytest-asyncio >= 0.18.1'
+        'pydantic >= 1.8',
+        'pytest >= 6.2',
+        'pytest-asyncio >= 0.15'
     ]
 )
