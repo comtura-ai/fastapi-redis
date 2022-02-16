@@ -4,7 +4,7 @@ This package provides a client that integrates with Fastapi and provides a decor
 
 ## Installation
 
-`$ pip install fastapi_redis`
+`$ pip install fastapi-redis`
 
 ## Usage
 
