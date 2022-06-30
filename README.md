@@ -65,3 +65,22 @@ async def my_controller_method(id: str,
                                background_tasks: BackgroundTasks):
     return some_data_that_will_be_cached
 ```
+
+#### Reset data
+
+Sometimes you want to reset what's on the cache and reprocess the response of the method/function/api without waiting for the timeout, these can be archieved sending the variable `reset_cache` to the `@router_cache()` decorator:
+
+```python
+import redis_client from fastapi_redis
+
+
+@router.get('/resource/{id}')
+@router_cache('resource_{id}_{user.id}', timedelta(days=1))
+async def my_controller_method(id: str,
+                               reset_cache: str = None,
+                               user: User = Depends(get_current_user)
+                               background_tasks: BackgroundTasks):
+    return some_data_that_will_be_cached
+```
+
+This way when the user sends to this url the query parameter `?reset_cache=true` it will reprocess the data and cache it again.
