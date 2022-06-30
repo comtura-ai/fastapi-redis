@@ -1,5 +1,6 @@
-import json
 import os
+import json
+import pickle
 from datetime import timedelta
 from typing import Any, Awaitable, Type, Union
 
@@ -21,8 +22,7 @@ class RedisClient(Redis):
         """
         response = await super().get(name=name)
         if response:
-            data = json.loads(response)
-            return model(**data) if data and model else data
+            return pickle.loads(response)
 
     async def set(
             self,
@@ -44,11 +44,8 @@ class RedisClient(Redis):
         :param keepttl:
         :return:
         """
-        if issubclass(type(value), BaseModel):
-            value = value.dict()
-        value = json.dumps(value)
         return await super().set(name=name,
-                                 value=value,
+                                 value=pickle.dumps(value),
                                  ex=expiration,
                                  nx=nx,
                                  xx=xx,

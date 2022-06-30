@@ -3,6 +3,7 @@ import logging
 from datetime import timedelta
 from functools import wraps
 
+from fastapi_redis import compile_template
 from fastapi_redis import redis_client
 
 
@@ -28,12 +29,18 @@ def redis_cache(cache_key_str: str, expiration: timedelta = None):
     def actual_decorator(func):
         @wraps(func)
         async def wrapper(*args, **kwargs):
-            # Check if the cache key is in the cache
-            cache_key = cache_key_str.format(**kwargs)
-            data = await redis_client.get(cache_key)
-            if data:
-                # Return the cached response
-                return data
+            # Build the cache key
+            cache_key = compile_template(cache_key_str, *args, **kwargs)
+
+            reset_cache = kwargs.get('reset_cache', False)
+            if reset_cache:
+                await redis_client.delete(cache_key)
+            else:
+                # Check if the cache key is in the cache
+                data = await redis_client.get(cache_key)
+                if data:
+                    # Return the cached response
+                    return data
 
             # Run the wrapped function
             func_result = await func(*args, **kwargs)
